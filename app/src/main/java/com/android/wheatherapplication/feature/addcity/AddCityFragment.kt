@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.android.wheatherapplication.R
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * AddCity Fragment.
  */
 class AddCityFragment : Fragment() {
 
