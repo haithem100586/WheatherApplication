@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/CitiesFragment">
+
+    <fragment
+        android:id="@+id/CitiesFragment"
+        android:name="com.android.wheatherapplication.feature.cities.CitiesFragment"
+        tools:layout="@layout/fragment_cities">
+        <action
+            android:id="@+id/action_CitiesFragment_to_AddCityFragment"
+            app:destination="@id/AddCityFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AddCityFragment"
+        android:name="com.android.wheatherapplication.feature.addcity.AddCityFragment"
+        tools:layout="@layout/fragment_add_city" />
+
+</navigation>
