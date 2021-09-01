@@ -9,6 +9,8 @@
     <dimen name="spacing_tiny">4dp</dimen>
     <dimen name="spacing_very_tiny">2dp</dimen>
 
+    <dimen name="settings_toolbar_padding">4dp</dimen>
+
     <!-- Text size -->
     <dimen name="text_size_big">15sp</dimen>
     <dimen name="text_size_medium">13sp</dimen>

@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".feature.cities.CitiesFragment">
 
+    <Button
+        android:id="@+id/addCityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium"
+        android:text="@string/add_city"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

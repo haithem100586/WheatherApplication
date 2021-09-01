@@ -7,16 +7,16 @@
 
     <fragment
         android:id="@+id/CitiesFragment"
-        android:name="com.android.wheatherapplication.feature.cities.CitiesFragment"
+        android:name="com.android.weatherapplication.feature.cities.CitiesFragment"
         tools:layout="@layout/fragment_cities">
         <action
-            android:id="@+id/action_CitiesFragment_to_AddCityFragment"
+            android:id="@+id/to_add_city"
             app:destination="@id/AddCityFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/AddCityFragment"
-        android:name="com.android.wheatherapplication.feature.addcity.AddCityFragment"
+        android:name="com.android.weatherapplication.feature.addcity.AddCityFragment"
         tools:layout="@layout/fragment_add_city" />
 
 </navigation>
