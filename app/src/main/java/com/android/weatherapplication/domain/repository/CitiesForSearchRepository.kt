@@ -2,6 +2,7 @@ package com.android.weatherapplication.domain.repository
 
 import androidx.lifecycle.LiveData
 import com.android.weatherapplication.domain.model.entity.CitiesForSearchEntity
+import com.snakydesign.livedataextensions.livedata.SingleLiveData
 
 interface CitiesForSearchRepository {
 
@@ -34,6 +35,15 @@ interface CitiesForSearchRepository {
      * @param cities the cities to insert.
      */
     suspend fun insertCities(cities: List<CitiesForSearchEntity>)
+
+    /**
+     * Deletes a city.
+     *
+     * @param city the city to delete.
+     *
+     * @return the resulting LiveData with the number of deleted flights.
+     */
+    fun delete(city: CitiesForSearchEntity): SingleLiveData<Int>
 
     /**
      * Deletes all cities.

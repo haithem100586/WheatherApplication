@@ -12,6 +12,7 @@ import com.android.weatherapplication.domain.repository.CurrentWeatherRepository
 import com.android.weatherapplication.domain.repository.ForecastRepository
 import com.android.weatherapplication.domain.usecases.AddCityUseCase
 import com.android.weatherapplication.domain.usecases.ListCitiesUseCase
+import com.android.weatherapplication.domain.usecases.RemoveCityUseCase
 import com.android.weatherapplication.feature.addcity.AddCityViewModel
 import com.android.weatherapplication.feature.cities.CitiesViewModel
 import com.android.weatherapplication.feature.main.NetworkAvailabilityMonitor
@@ -24,7 +25,7 @@ import org.koin.dsl.module
 val applicationModule = module {
 
     // presentation
-    viewModel { CitiesViewModel(fg.get()) }
+    viewModel { CitiesViewModel(fg.get(), fg.get()) }
     viewModel { AddCityViewModel(fg.get()) }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -38,6 +39,7 @@ val applicationModule = module {
 
         scoped { ListCitiesUseCase(get()) }
         scoped { AddCityUseCase(get()) }
+        scoped { RemoveCityUseCase(get()) }
 
         scoped { ForecastRepositoryImpl(get()) } bind ForecastRepository::class
         scoped { CurrentWeatherRepositoryImpl(get()) } bind CurrentWeatherRepository::class

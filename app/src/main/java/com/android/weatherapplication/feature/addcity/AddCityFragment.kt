@@ -69,7 +69,6 @@ class AddCityFragment : ScreenStateFragment<FragmentAddCityBinding>() {
                     viewModel.currentState.messageResId,
                     Toast.LENGTH_SHORT
                 ).show()
-                findNavController().popBackStack()
             }
     }
 

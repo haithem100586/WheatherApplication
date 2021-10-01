@@ -24,4 +24,7 @@
     <!-- Radius -->
     <dimen name="radius_9">9dp</dimen>
 
+    <!-- Buttons -->
+    <dimen name="button_swipe_action_width">72dp</dimen>
+
 </resources>

@@ -8,7 +8,7 @@ import androidx.room.Query
 import com.android.weatherapplication.domain.model.entity.CitiesForSearchEntity
 
 @Dao
-interface CitiesForSearchDao {
+interface CitiesForSearchDao : BaseDao<CitiesForSearchEntity> {
 
     @Query("SELECT * FROM CitiesForSearch")
     fun getCities(): LiveData<List<CitiesForSearchEntity>>

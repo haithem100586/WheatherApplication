@@ -7,5 +7,6 @@
 
     <string name="weather_no_connection" formatted="false">Please connect to the internet.</string>
     <string name="add_city_success" formatted="false">City Added with success.</string>
+    <string name="delete_city_success" formatted="false">City deleted with success.</string>
 
 </resources>
