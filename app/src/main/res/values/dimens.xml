@@ -20,4 +20,8 @@
     <dimen name="text_size_title">19sp</dimen>
     <dimen name="text_size_headline">17sp</dimen>
     <dimen name="text_size_description">@dimen/text_size_big</dimen>
+
+    <!-- Radius -->
+    <dimen name="radius_9">9dp</dimen>
+
 </resources>

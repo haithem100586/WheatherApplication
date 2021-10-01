@@ -36,7 +36,7 @@ val applicationModule = module {
         scoped { get<WeatherDatabase>().currentWeatherDao() }
         scoped { get<WeatherDatabase>().citiesForSearchDao() }
 
-        scoped { ListCitiesUseCase() }
+        scoped { ListCitiesUseCase(get()) }
         scoped { AddCityUseCase(get()) }
 
         scoped { ForecastRepositoryImpl(get()) } bind ForecastRepository::class

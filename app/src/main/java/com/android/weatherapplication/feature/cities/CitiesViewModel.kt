@@ -12,21 +12,11 @@ import com.android.weatherapplication.domain.usecases.ListCitiesUseCase
 class CitiesViewModel(
     listCitiesUseCase: ListCitiesUseCase,
     initialState: State = State()
-) :
-    BaseStateViewModel<State, BaseEvent>(initialState), ViewModel {
-
-    private var isInternetAvailable: Boolean = false
-
-    ///////////////////////////////////////////////////////////////////////////
-    // ViewModel contract implementation
-    ///////////////////////////////////////////////////////////////////////////
-
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Internal
-    ///////////////////////////////////////////////////////////////////////////
+) : BaseStateViewModel<State, BaseEvent>(initialState), ViewModel {
 
     init {
-        println("xxxxxxxxxxxxxxxx %d : " + listCitiesUseCase.execute(5))
+        listCitiesUseCase.execute().observe(this) {
+            updateState { state -> state.copy(citiesList = it) }
+        }
     }
 }
