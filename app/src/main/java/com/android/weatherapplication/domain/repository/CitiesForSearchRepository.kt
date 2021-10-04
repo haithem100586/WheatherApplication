@@ -26,15 +26,17 @@ interface CitiesForSearchRepository {
      * Inserts city.
      *
      * @param city the city to insert.
+     *
+     * @return the resulting LiveData with the id of the saved city.
      */
-    suspend fun insertCity(city: CitiesForSearchEntity)
+    suspend fun insertCity(city: CitiesForSearchEntity): Long
 
     /**
      * Inserts cities.
      *
      * @param cities the cities to insert.
      */
-    suspend fun insertCities(cities: List<CitiesForSearchEntity>)
+    suspend fun insertCities(cities: List<CitiesForSearchEntity>): List<Long>
 
     /**
      * Deletes a city.

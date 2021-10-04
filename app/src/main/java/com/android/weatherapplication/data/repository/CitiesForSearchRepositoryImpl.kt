@@ -15,11 +15,10 @@ class CitiesForSearchRepositoryImpl(
 
     override fun getCityByName(cityName: String?) = citiesForSearchDao.getCityByName(cityName)
 
-    override suspend fun insertCity(city: CitiesForSearchEntity) =
-        citiesForSearchDao.insertCity(city)
+    override suspend fun insertCity(city: CitiesForSearchEntity) = citiesForSearchDao.insert(city)
 
     override suspend fun insertCities(cities: List<CitiesForSearchEntity>) =
-        citiesForSearchDao.insertCities(cities)
+        citiesForSearchDao.insert(cities)
 
     override fun delete(city: CitiesForSearchEntity) =
         liveData(Dispatchers.IO) { emit(citiesForSearchDao.delete(city)) }.toSingleLiveData()
