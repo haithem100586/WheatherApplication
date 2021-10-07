@@ -97,7 +97,11 @@ class CitiesFragment : ScreenStateFragment<FragmentCitiesBinding>() {
     }
 
     private fun navigateToCurrentWeatherAndForecast(city: CitiesForSearchEntity) {
-        Log.i("TAG", "city : $city")
+        Log.i("navigateToWeather", "city : $city")
+        if (city.name != null) {
+            val action = CitiesFragmentDirections.toWeather(city.name)
+            findNavController().navigate(action)
+        }
     }
 
     private fun deleteCity(position: Int) {

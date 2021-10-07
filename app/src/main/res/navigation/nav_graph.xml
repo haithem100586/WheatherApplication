@@ -12,11 +12,23 @@
         <action
             android:id="@+id/to_add_city"
             app:destination="@id/AddCityFragment" />
+        <action
+            android:id="@+id/to_weather"
+            app:destination="@id/WeatherFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/AddCityFragment"
         android:name="com.android.weatherapplication.feature.addcity.AddCityFragment"
         tools:layout="@layout/fragment_add_city" />
+
+    <fragment
+        android:id="@+id/WeatherFragment"
+        android:name="com.android.weatherapplication.feature.weather.WeatherFragment"
+        tools:layout="@layout/fragment_weather" >
+        <argument
+            android:name="city"
+            app:argType="string" />
+    </fragment>
 
 </navigation>
