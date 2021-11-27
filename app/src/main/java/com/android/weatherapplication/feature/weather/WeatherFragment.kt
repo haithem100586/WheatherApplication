@@ -40,12 +40,13 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
     override fun initViews() {
         super.initViews()
         val args: WeatherFragmentArgs by navArgs()
-
-        val layoutManager = LinearLayoutManager(
+        val linearLayoutManager = LinearLayoutManager(
             requireContext(), LinearLayoutManager.HORIZONTAL, false
         )
-        binding.forecastRecyclerView.layoutManager = layoutManager
-        binding.forecastRecyclerView.setHasFixedSize(true)
+        binding.forecastRecyclerView.apply {
+            layoutManager = linearLayoutManager
+            setHasFixedSize(true)
+        }
         viewModel.getCurrentWeather(args.city)
         viewModel.getForecast(args.city)
     }
@@ -61,7 +62,6 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
     }
 
     override fun initObservations() {
-
         viewModel.state
             .map { it.weatherIconDrawable }
             .distinctUntilChanged()
