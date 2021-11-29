@@ -14,7 +14,6 @@ import com.android.weatherapplication.common.ScreenStateFragment
 import com.android.weatherapplication.databinding.FragmentWeatherBinding
 import com.android.weatherapplication.domain.model.CurrentWeatherResponse
 import com.android.weatherapplication.domain.model.ListItem
-import com.android.weatherapplication.utils.extensions.resIdByName
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -63,7 +62,7 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
 
     override fun initObservations() {
         viewModel.state
-            .map { it.weatherIconDrawable }
+            .map { it.weatherIconResId }
             .distinctUntilChanged()
             .observe(viewLifecycleOwner) { displayWeatherIcon(it) }
 
@@ -98,9 +97,9 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
     // Internal
     ///////////////////////////////////////////////////////////////////////////
 
-    private fun displayWeatherIcon(weatherIconDrawable: String?) {
+    private fun displayWeatherIcon(weatherIconDrawable: Int?) {
         Glide.with(requireContext())
-            .load(requireContext().resIdByName("icon_$weatherIconDrawable", "drawable"))
+            .load(weatherIconDrawable)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .placeholder(R.mipmap.ic_launcher)
             .dontAnimate()

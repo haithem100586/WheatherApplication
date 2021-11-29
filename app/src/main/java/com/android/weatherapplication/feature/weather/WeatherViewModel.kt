@@ -1,5 +1,7 @@
 package com.android.weatherapplication.feature.weather
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import com.android.weatherapplication.R
 import com.android.weatherapplication.feature.weather.WeatherContract.State
@@ -12,11 +14,14 @@ import com.android.weatherapplication.domain.model.ForecastResult
 import com.android.weatherapplication.domain.usecases.GetCurrentWeatherUseCase
 import com.android.weatherapplication.domain.usecases.GetForecastUseCase
 import com.android.weatherapplication.feature.main.NetworkAvailabilityMonitor
+import com.android.weatherapplication.utils.extensions.resIdByName
 
 /**
  * Weather ViewModel.
  */
+@SuppressLint("StaticFieldLeak")
 class WeatherViewModel(
+    private val context: Context,
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
     private val getForecastUseCase: GetForecastUseCase,
     networkAvailabilityMonitor: NetworkAvailabilityMonitor,
@@ -41,7 +46,10 @@ class WeatherViewModel(
                     updateState {
                         it.copy(
                             currentWeatherResponse = result.currentWeatherResponse,
-                            weatherIconDrawable = result.currentWeatherResponse.weather?.get(0)?.icon,
+                            weatherIconResId = context.resIdByName(
+                                "icon_${result.currentWeatherResponse.weather?.get(0)?.icon}",
+                                "drawable"
+                            ),
                             errorText = null
                         )
                     }
@@ -60,10 +68,7 @@ class WeatherViewModel(
             when (result) {
                 is ForecastResult.Success -> {
                     updateState {
-                        it.copy(
-                            forecastResponse = result.forecastResponse,
-                            errorText = null
-                        )
+                        it.copy(forecastResponse = result.forecastResponse, errorText = null)
                     }
                 }
                 is ForecastResult.ServerUnavailable ->
