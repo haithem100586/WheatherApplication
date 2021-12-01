@@ -21,9 +21,12 @@ interface CitiesContract {
 
     /**
      * @property citiesList the city list.
+     * @property isInternetAvailable when is internet available or not.
+     * @property messageResId resource id for message.
      */
     data class State(
         val citiesList: List<CitiesForSearchEntity> = arrayListOf(),
+        val isInternetAvailable: Boolean = false,
         @StringRes val messageResId: Int = R.string.delete_city_success
     ) : BaseState
 }

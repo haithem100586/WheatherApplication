@@ -28,7 +28,7 @@ interface AddCityContract {
 
     /**
      * @property cityForSearchEntity the searched city.
-     * @property messageResId resource id for message..
+     * @property messageResId resource id for message.
      * @property isCityAdded when city is added or not.
      */
     data class State(

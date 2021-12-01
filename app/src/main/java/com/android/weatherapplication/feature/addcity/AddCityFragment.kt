@@ -3,7 +3,6 @@ package com.android.weatherapplication.feature.addcity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
@@ -11,6 +10,7 @@ import com.android.weatherapplication.R
 import com.android.weatherapplication.common.ScreenFragment
 import com.android.weatherapplication.common.ScreenStateFragment
 import com.android.weatherapplication.databinding.FragmentAddCityBinding
+import com.android.weatherapplication.utils.extensions.displayToast
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -64,11 +64,7 @@ class AddCityFragment : ScreenStateFragment<FragmentAddCityBinding>() {
             .filter { it == true }
             .distinctUntilChanged()
             .observe(viewLifecycleOwner) {
-                Toast.makeText(
-                    requireContext(),
-                    viewModel.currentState.messageResId,
-                    Toast.LENGTH_SHORT
-                ).show()
+                requireContext().displayToast(viewModel.currentState.messageResId)
             }
     }
 

@@ -4,7 +4,6 @@ import android.graphics.Canvas
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.map
@@ -20,6 +19,7 @@ import com.android.weatherapplication.common.SwipeControllerActions
 import com.android.weatherapplication.common.view.recyclerview.MarginItemDecorator
 import com.android.weatherapplication.databinding.FragmentCitiesBinding
 import com.android.weatherapplication.domain.model.entity.CitiesForSearchEntity
+import com.android.weatherapplication.utils.extensions.displayToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -97,20 +97,20 @@ class CitiesFragment : ScreenStateFragment<FragmentCitiesBinding>() {
     }
 
     private fun navigateToCurrentWeatherAndForecast(city: CitiesForSearchEntity) {
-        Log.i("navigateToWeather", "city : $city")
-        if (city.name != null) {
-            val action = CitiesFragmentDirections.toWeather(city.name)
-            findNavController().navigate(action)
+        if (viewModel.currentState.isInternetAvailable) {
+            Log.i("navigateToWeather", "city : $city")
+            if (city.name != null) {
+                val action = CitiesFragmentDirections.toWeather(city.name)
+                findNavController().navigate(action)
+            }
+        } else {
+            requireContext().displayToast(R.string.weather_no_connection)
         }
     }
 
     private fun deleteCity(position: Int) {
         viewModel.deleteCity(adapter.getItem(position))
         adapter.removeAt(position)
-        Toast.makeText(
-            requireContext(),
-            viewModel.currentState.messageResId,
-            Toast.LENGTH_SHORT
-        ).show()
+        requireContext().displayToast(viewModel.currentState.messageResId)
     }
 }

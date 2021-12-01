@@ -36,9 +36,9 @@ import java.util.concurrent.TimeUnit
 val applicationModule = module {
 
     // presentation
-    viewModel { CitiesViewModel(fg.get(), fg.get()) }
+    viewModel { CitiesViewModel(fg.get(), fg.get(), fg.get()) }
     viewModel { AddCityViewModel(fg.get()) }
-    viewModel { WeatherViewModel(androidContext(), fg.get(), fg.get(), fg.get()) }
+    viewModel { WeatherViewModel(androidContext(), fg.get(), fg.get()) }
 
     ///////////////////////////////////////////////////////////////////////////
     // Data

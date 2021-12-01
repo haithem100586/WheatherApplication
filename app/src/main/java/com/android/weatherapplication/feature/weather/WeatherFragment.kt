@@ -14,6 +14,7 @@ import com.android.weatherapplication.common.ScreenStateFragment
 import com.android.weatherapplication.databinding.FragmentWeatherBinding
 import com.android.weatherapplication.domain.model.CurrentWeatherResponse
 import com.android.weatherapplication.domain.model.ListItem
+import com.android.weatherapplication.utils.extensions.displayToast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -61,6 +62,11 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
     }
 
     override fun initObservations() {
+        viewModel.state
+            .map { it.errorText }
+            .distinctUntilChanged()
+            .observe(viewLifecycleOwner) { if (it != null) requireContext().displayToast(it) }
+
         viewModel.state
             .map { it.weatherIconResId }
             .distinctUntilChanged()

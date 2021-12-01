@@ -30,6 +30,7 @@ interface WeatherContract {
 
     /**
      * @property currentWeatherResponse the current weather response.
+     * @property forecastResponse the forecast response.
      * @property weatherIconResId resource id for weather icon.
      * @property errorText resource id for text error.
      */

@@ -13,7 +13,6 @@ import com.android.weatherapplication.domain.model.CurrentWeatherResult
 import com.android.weatherapplication.domain.model.ForecastResult
 import com.android.weatherapplication.domain.usecases.GetCurrentWeatherUseCase
 import com.android.weatherapplication.domain.usecases.GetForecastUseCase
-import com.android.weatherapplication.feature.main.NetworkAvailabilityMonitor
 import com.android.weatherapplication.utils.extensions.resIdByName
 
 /**
@@ -24,15 +23,8 @@ class WeatherViewModel(
     private val context: Context,
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
     private val getForecastUseCase: GetForecastUseCase,
-    networkAvailabilityMonitor: NetworkAvailabilityMonitor,
     initialState: State = State()
 ) : BaseStateViewModel<State, BaseEvent>(initialState), ViewModel {
-
-    private var isNetworkAvailable = false
-
-    init {
-        networkAvailabilityMonitor.observe(this) { available -> isNetworkAvailable = available }
-    }
 
     ///////////////////////////////////////////////////////////////////////////
     // ViewModel contract implementation
