@@ -31,12 +31,14 @@ class WeatherViewModel(
     ///////////////////////////////////////////////////////////////////////////
 
     override fun getCurrentWeather(cityName: String) {
+        updateState { it.copy(isWeatherTaken = true) }
         getCurrentWeatherUseCase.execute(cityName).observeOnce(this) { result ->
             Log.i("getCurrentWeather", "result : $result")
             when (result) {
                 is CurrentWeatherResult.Success -> {
                     updateState {
                         it.copy(
+                            isWeatherTaken = false,
                             currentWeatherResponse = result.currentWeatherResponse,
                             weatherIconResId = context.resIdByName(
                                 "icon_${result.currentWeatherResponse.weather?.get(0)?.icon}",
@@ -47,26 +49,45 @@ class WeatherViewModel(
                     }
                 }
                 is CurrentWeatherResult.ServerUnavailable ->
-                    updateState { it.copy(errorText = R.string.weather_server_unreachable) }
+                    updateState {
+                        it.copy(
+                            isWeatherTaken = false,
+                            errorText = R.string.weather_server_unreachable
+                        )
+                    }
                 is CurrentWeatherResult.ServerError ->
-                    updateState { it.copy(errorText = R.string.weather_server_error) }
+                    updateState {
+                        it.copy(isWeatherTaken = false, errorText = R.string.weather_server_error)
+                    }
             }
         }
     }
 
     override fun getForecast(cityName: String) {
+        updateState { it.copy(isForecastTaken = true) }
         getForecastUseCase.execute(cityName).observeOnce(this) { result ->
             Log.i("getForecast", "result : $result")
             when (result) {
                 is ForecastResult.Success -> {
                     updateState {
-                        it.copy(forecastResponse = result.forecastResponse, errorText = null)
+                        it.copy(
+                            isForecastTaken = false,
+                            forecastResponse = result.forecastResponse,
+                            errorText = null
+                        )
                     }
                 }
                 is ForecastResult.ServerUnavailable ->
-                    updateState { it.copy(errorText = R.string.weather_server_unreachable) }
+                    updateState {
+                        it.copy(
+                            isForecastTaken = false,
+                            errorText = R.string.weather_server_unreachable
+                        )
+                    }
                 is ForecastResult.ServerError ->
-                    updateState { it.copy(errorText = R.string.weather_server_error) }
+                    updateState {
+                        it.copy(isForecastTaken = false, errorText = R.string.weather_server_error)
+                    }
             }
         }
     }

@@ -29,15 +29,25 @@ interface WeatherContract {
     }
 
     /**
+     * @property isWeatherTaken whether the weather is taken or not.
+     * @property isForecastTaken whether the forecast is taken or not.
      * @property currentWeatherResponse the current weather response.
      * @property forecastResponse the forecast response.
      * @property weatherIconResId resource id for weather icon.
      * @property errorText resource id for text error.
      */
     data class State(
+        val isWeatherTaken: Boolean = false,
+        val isForecastTaken: Boolean = false,
         val currentWeatherResponse: CurrentWeatherResponse? = null,
         val forecastResponse: ForecastResponse? = null,
         @DrawableRes val weatherIconResId: Int? = null,
         @StringRes val errorText: Int? = null
-    ) : BaseState
+    ) : BaseState {
+
+        /**
+         * display loading progress bar.
+         */
+        val isLoading: Boolean get() = isWeatherTaken && isForecastTaken
+    }
 }

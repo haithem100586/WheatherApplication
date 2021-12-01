@@ -1,8 +1,8 @@
 package com.android.weatherapplication.feature.weather
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
@@ -63,6 +63,11 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
 
     override fun initObservations() {
         viewModel.state
+            .map { it.isLoading }
+            .distinctUntilChanged()
+            .observe(viewLifecycleOwner) { binding.loading.isVisible = it }
+
+        viewModel.state
             .map { it.errorText }
             .distinctUntilChanged()
             .observe(viewLifecycleOwner) { if (it != null) requireContext().displayToast(it) }
@@ -76,11 +81,8 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
             .map { it.currentWeatherResponse }
             .distinctUntilChanged()
             .observe(viewLifecycleOwner) { currentWeatherResponse ->
-                if (currentWeatherResponse?.weather.isNullOrEmpty()) {
-                    setVisibilityWeatherDataView(false)
-                } else {
+                if (!currentWeatherResponse?.weather.isNullOrEmpty()) {
                     displayCurrentWeatherData(currentWeatherResponse)
-                    setVisibilityWeatherDataView(true)
                 }
             }
 
@@ -92,9 +94,6 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
                     adapter = ForecastAdapter(requireContext())
                     forecastResponse?.list?.let { updateItemsList(it) }
                     binding.forecastRecyclerView.adapter = adapter
-                    setVisibilityForecastDataView(true)
-                } else {
-                    setVisibilityForecastDataView(false)
                 }
             }
     }
@@ -118,22 +117,6 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
             temperatureText.text = currentWeatherResponse?.main?.getTempString()
             weatherMainText.text = currentWeatherResponse?.weather?.get(0)?.description
             humidityText.text = currentWeatherResponse?.main?.getHumidityString()
-        }
-    }
-
-    private fun setVisibilityWeatherDataView(show: Boolean) {
-        binding.apply {
-            noDataText.visibility = if (show) View.GONE else View.VISIBLE
-            weatherRelativeLayout.visibility = if (show) View.VISIBLE else View.GONE
-            loading.visibility = View.GONE
-        }
-    }
-
-    private fun setVisibilityForecastDataView(show: Boolean) {
-        binding.apply {
-            noDataText.visibility = if (show) View.GONE else View.VISIBLE
-            weatherRelativeLayout.visibility = if (show) View.VISIBLE else View.GONE
-            loading.visibility = View.GONE
         }
     }
 
