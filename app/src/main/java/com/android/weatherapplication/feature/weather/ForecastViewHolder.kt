@@ -26,7 +26,7 @@ class ForecastViewHolder(
             Glide.with(context)
                 .load(context.resIdByName("icon_"+listItem.getWeatherItem()?.icon, "drawable"))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.drawable.ic_loading)
                 .dontAnimate()
                 .into(forecastIcon)
 

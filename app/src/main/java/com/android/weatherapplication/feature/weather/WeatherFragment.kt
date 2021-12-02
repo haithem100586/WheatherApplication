@@ -100,7 +100,7 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
         Glide.with(requireContext())
             .load(weatherIconDrawable)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .placeholder(R.mipmap.ic_launcher)
+            .placeholder(R.drawable.ic_loading)
             .dontAnimate()
             .into(binding.forecastContainer.weatherIcon)
     }
