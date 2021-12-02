@@ -41,7 +41,6 @@ class AddCityFragment : ScreenStateFragment<FragmentAddCityBinding>() {
         if (!Places.isInitialized()) {
             Places.initialize(requireContext(), apiKey)
         }
-
         setupAutoCompletePlace()
     }
 
@@ -51,9 +50,7 @@ class AddCityFragment : ScreenStateFragment<FragmentAddCityBinding>() {
 
     override fun initEvents() {
         binding.apply {
-
             toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-
             addCityButton.setOnClickListener { viewModel.addCity() }
         }
     }
@@ -65,6 +62,7 @@ class AddCityFragment : ScreenStateFragment<FragmentAddCityBinding>() {
             .distinctUntilChanged()
             .observe(viewLifecycleOwner) {
                 requireContext().displayToast(viewModel.currentState.messageResId)
+                findNavController().popBackStack()
             }
     }
 

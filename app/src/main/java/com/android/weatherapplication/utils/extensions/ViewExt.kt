@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 
 @DrawableRes
 fun Context.resIdByName(resIdName: String?, resType: String): Int {
@@ -13,6 +14,6 @@ fun Context.resIdByName(resIdName: String?, resType: String): Int {
     throw Resources.NotFoundException()
 }
 
-fun Context.displayToast(textToDisplay: Int): Toast {
-    return Toast.makeText(this, textToDisplay, Toast.LENGTH_SHORT).apply { show() }
+fun Context.displayToast(@StringRes textToDisplay: Int): Toast {
+    return  Toast.makeText(this, getString(textToDisplay), Toast.LENGTH_SHORT).apply { show() }
 }

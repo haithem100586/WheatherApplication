@@ -80,21 +80,15 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
         viewModel.state
             .map { it.currentWeatherResponse }
             .distinctUntilChanged()
-            .observe(viewLifecycleOwner) { currentWeatherResponse ->
-                if (!currentWeatherResponse?.weather.isNullOrEmpty()) {
-                    displayCurrentWeatherData(currentWeatherResponse)
-                }
-            }
+            .observe(viewLifecycleOwner) { displayCurrentWeatherData(it) }
 
         viewModel.state
             .map { it.forecastResponse }
             .distinctUntilChanged()
             .observe(viewLifecycleOwner) { forecastResponse ->
-                if (!(forecastResponse?.list.isNullOrEmpty())) {
-                    adapter = ForecastAdapter(requireContext())
-                    forecastResponse?.list?.let { updateItemsList(it) }
-                    binding.forecastRecyclerView.adapter = adapter
-                }
+                adapter = ForecastAdapter(requireContext())
+                forecastResponse?.list?.let { updateItemsList(it) }
+                binding.forecastRecyclerView.adapter = adapter
             }
     }
 
