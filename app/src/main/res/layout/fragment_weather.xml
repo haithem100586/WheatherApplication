@@ -44,8 +44,8 @@
                     android:checked="true"
                     android:clickable="false"
                     android:text="@string/today"
-                    android:textColor="@color/teal_200"
-                    app:chipBackgroundColor="@color/violet" />
+                    android:textColor="@color/supernova"
+                    app:chipBackgroundColor="@color/lochmara" />
 
                 <include
                     android:id="@+id/forecastContainer"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_medium"
                     android:text="@string/next_5_days"
-                    android:textColor="@color/manatee"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_title"
                     android:textStyle="bold" />
 
