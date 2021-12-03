@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/currentweatherCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    app:cardCornerRadius="@dimen/radius_24"
+    app:cardElevation="@dimen/elevation_8"
+    tools:visibility="invisible">
+
+    <RelativeLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/weatherIcon"
+            android:layout_width="124dp"
+            android:layout_height="124dp"
+            android:layout_marginStart="@dimen/spacing_big"
+            android:layout_marginTop="@dimen/spacing_very_big"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/a10d_svg" />
+
+        <TextView
+            android:id="@+id/temperatureText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/spacing_very_big"
+            android:layout_marginEnd="@dimen/spacing_big"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_extremely_big"
+            tools:ignore="RelativeOverlap"
+            tools:text="25°" />
+
+        <TextView
+            android:id="@+id/weatherMainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/temperatureText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_title"
+            tools:text="Clouds &amp; Sun" />
+
+        <TextView
+            android:id="@+id/humidityHeaderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/weatherMainText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:text="@string/humidity"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/humidityText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/humidityHeaderText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            android:textColor="@color/quantum_white_100"
+            android:textSize="@dimen/text_size_very_big"
+            tools:text="35°" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
