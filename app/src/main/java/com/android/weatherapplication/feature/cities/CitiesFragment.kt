@@ -30,7 +30,7 @@ class CitiesFragment : ScreenStateFragment<FragmentCitiesBinding>() {
     override val viewModel: CitiesViewModel by viewModel()
     override val screenOrientation = ScreenFragment.SENSOR
 
-    val adapter = CitiesAdapter {
+    private val citiesAdapter = CitiesAdapter {
         navigateToCurrentWeatherAndForecast(it)
     }
 
@@ -44,28 +44,10 @@ class CitiesFragment : ScreenStateFragment<FragmentCitiesBinding>() {
 
     override fun initViews() {
         super.initViews()
-        binding.myCitiesRecyclerView.adapter = adapter
-        binding.myCitiesRecyclerView.layoutManager = GridLayoutManager(context, 1)
-
-        val swipeController = SwipeController(requireContext(), object : SwipeControllerActions {
-            override fun onRightClicked(position: Int) {
-                deleteCity(position)
-            }
-        }, ContextCompat.getDrawable(requireContext(), R.drawable.ic_trash))
-
-        ItemTouchHelper(swipeController).attachToRecyclerView(binding.myCitiesRecyclerView)
-
         binding.myCitiesRecyclerView.apply {
-            addItemDecoration(object : RecyclerView.ItemDecoration() {
-                override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-                    swipeController.onDraw(c)
-                }
-            })
-            addItemDecoration(
-                MarginItemDecorator(
-                    resources.getDimension(R.dimen.spacing_small).toInt()
-                )
-            )
+            adapter = citiesAdapter
+            layoutManager = GridLayoutManager(context, 1)
+            swipeToRecyclerView(this)
         }
     }
 
@@ -93,7 +75,7 @@ class CitiesFragment : ScreenStateFragment<FragmentCitiesBinding>() {
     ///////////////////////////////////////////////////////////////////////////
 
     private fun updateCitiesList(cityList: List<CitiesForSearchEntity>) {
-        adapter.citiesList = cityList.toMutableList()
+        citiesAdapter.citiesList = cityList.toMutableList()
     }
 
     private fun navigateToCurrentWeatherAndForecast(city: CitiesForSearchEntity) {
@@ -108,9 +90,32 @@ class CitiesFragment : ScreenStateFragment<FragmentCitiesBinding>() {
         }
     }
 
+    private fun swipeToRecyclerView(recyclerView: RecyclerView) {
+        val swipeController = SwipeController(requireContext(), object : SwipeControllerActions {
+            override fun onRightClicked(position: Int) {
+                deleteCity(position)
+            }
+        }, ContextCompat.getDrawable(requireContext(), R.drawable.ic_trash))
+
+        ItemTouchHelper(swipeController).attachToRecyclerView(recyclerView)
+
+        recyclerView.apply {
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+                override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+                    swipeController.onDraw(c)
+                }
+            })
+            addItemDecoration(
+                MarginItemDecorator(
+                    resources.getDimension(R.dimen.spacing_small).toInt()
+                )
+            )
+        }
+    }
+
     private fun deleteCity(position: Int) {
-        viewModel.deleteCity(adapter.getItem(position))
-        adapter.removeAt(position)
+        viewModel.deleteCity(citiesAdapter.getItem(position))
+        citiesAdapter.removeAt(position)
         requireContext().displayToast(viewModel.currentState.messageResId)
     }
 }
