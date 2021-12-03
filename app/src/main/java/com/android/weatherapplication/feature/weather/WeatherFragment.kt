@@ -27,7 +27,7 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
     override val viewModel: WeatherViewModel by viewModel()
     override val screenOrientation = ScreenFragment.SENSOR
 
-    private lateinit var adapter: ForecastAdapter
+    private lateinit var forecastAdapter: ForecastAdapter
 
     ///////////////////////////////////////////////////////////////////////////
     // Views init
@@ -86,9 +86,9 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
             .map { it.forecastResponse }
             .distinctUntilChanged()
             .observe(viewLifecycleOwner) { forecastResponse ->
-                adapter = ForecastAdapter(requireContext())
+                forecastAdapter = ForecastAdapter(requireContext())
                 forecastResponse?.list?.let { updateItemsList(it) }
-                binding.forecastRecyclerView.adapter = adapter
+                binding.forecastRecyclerView.adapter = forecastAdapter
             }
     }
 
@@ -115,6 +115,6 @@ class WeatherFragment : ScreenStateFragment<FragmentWeatherBinding>() {
     }
 
     private fun updateItemsList(itemsList: List<ListItem>) {
-        adapter.itemsList = itemsList.toMutableList()
+        forecastAdapter.itemsList = itemsList.toMutableList()
     }
 }
