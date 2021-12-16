@@ -9,7 +9,7 @@ plugins {
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "31.0.0"
 
     defaultConfig {
         applicationId "com.android.weatherapplication"
@@ -28,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 
     // Add binding
@@ -42,11 +42,6 @@ android {
 dependencies {
     // Kotlin
     api "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-
-    // Testing
-    testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$extJunitVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
     // AndroidX
     api "androidx.appcompat:appcompat:$appCompactVersion"
@@ -95,4 +90,14 @@ dependencies {
     api "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
     api "com.squareup.retrofit2:retrofit:$retrofitVersion"
     api "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+
+    // Unit test
+    androidTestImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "android.arch.core:core-testing:$coretestingVersion"
+    androidTestImplementation "org.koin:koin-test:$koinVersion"
+    androidTestImplementation "io.mockk:mockk:$mockkVersion"
+    androidTestImplementation "androidx.test:runner:$androidxTestRunnerVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    // Espresso
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 }
