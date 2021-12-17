@@ -20,9 +20,4 @@ data class WeatherItem(
 
     @Json(name = "id")
     val id: Int?
-) : Parcelable {
-
-    fun getDescriptionText(): String? {
-        return description?.capitalize()
-    }
-}
+) : Parcelable
