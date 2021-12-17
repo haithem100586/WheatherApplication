@@ -2,7 +2,6 @@ package com.android.weatherapplication.domain.model.entity
 
 import android.os.Parcelable
 import androidx.room.*
-import com.android.weatherapplication.domain.model.ForecastResponse
 import com.android.weatherapplication.domain.model.ListItem
 import kotlinx.parcelize.Parcelize
 
@@ -20,12 +19,4 @@ data class ForecastEntity(
 
     @ColumnInfo(name = "list")
     var list: List<ListItem>?
-) : Parcelable {
-
-    @Ignore
-    constructor(forecastResponse: ForecastResponse) : this(
-        id = 0,
-        city = forecastResponse.city?.let { CityEntity(it) },
-        list = forecastResponse.list
-    )
-}
+) : Parcelable

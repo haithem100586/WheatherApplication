@@ -21,7 +21,7 @@ buildscript {
 
         googlePlacesVersion = "2.5.0"
 
-        roomVersion = "2.3.0"
+        roomVersion = "2.4.0"
 
         moshiVersion = "1.12.0"
 

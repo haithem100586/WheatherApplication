@@ -14,10 +14,4 @@ data class WindEntity(
     val deg: Double?,
     @ColumnInfo(name = "speed")
     val speed: Double?
-) : Parcelable {
-    @Ignore
-    constructor(wind: Wind?) : this(
-        deg = wind?.deg,
-        speed = wind?.speed
-    )
-}
+) : Parcelable

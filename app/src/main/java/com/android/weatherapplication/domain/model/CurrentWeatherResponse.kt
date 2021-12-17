@@ -3,7 +3,6 @@ package com.android.weatherapplication.domain.model
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Parcelable
-import com.android.weatherapp.domain.model.Main
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize

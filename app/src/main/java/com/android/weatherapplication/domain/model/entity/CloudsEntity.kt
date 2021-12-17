@@ -12,9 +12,5 @@ import kotlinx.parcelize.Parcelize
 data class CloudsEntity(
     @ColumnInfo(name = "all")
     var all: Int
-) : Parcelable {
-    @Ignore
-    constructor(clouds: Clouds?) : this(
-        all = clouds?.all ?: 0
-    )
-}
+) : Parcelable
+

@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/allports</item>
         <item name="colorPrimaryVariant">@color/lochmara</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/malibu</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/starship</item>
         <item name="colorSecondaryVariant">@color/supernova</item>
