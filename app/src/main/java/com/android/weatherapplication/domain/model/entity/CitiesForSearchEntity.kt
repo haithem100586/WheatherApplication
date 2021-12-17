@@ -8,7 +8,7 @@ import com.android.weatherapplication.utils.extensions.bold
 import com.android.weatherapplication.utils.extensions.italic
 import com.android.weatherapplication.utils.extensions.plus
 import com.android.weatherapplication.utils.extensions.spannable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "CitiesForSearch")

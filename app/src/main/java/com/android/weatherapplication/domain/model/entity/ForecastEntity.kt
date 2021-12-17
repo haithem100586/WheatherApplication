@@ -4,7 +4,7 @@ import android.os.Parcelable
 import androidx.room.*
 import com.android.weatherapplication.domain.model.ForecastResponse
 import com.android.weatherapplication.domain.model.ListItem
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 
 @Parcelize

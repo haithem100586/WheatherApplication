@@ -7,7 +7,7 @@ import com.android.weatherapplication.domain.model.CurrentWeatherResponse
 import com.android.weatherapplication.domain.model.WeatherItem
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 

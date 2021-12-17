@@ -6,7 +6,7 @@ import android.os.Parcelable
 import com.android.weatherapp.domain.model.Main
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import java.text.SimpleDateFormat
