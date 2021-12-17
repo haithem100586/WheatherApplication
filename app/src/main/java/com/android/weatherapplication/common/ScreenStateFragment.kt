@@ -37,11 +37,6 @@ abstract class ScreenStateFragment<B : ViewBinding> : BaseStateFragment<B>() {
         initGlobalObservations()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, onBackPressedCallback)
-    }
-
     override fun onDestroyView() {
         onBackPressedCallback.isEnabled = false
         super.onDestroyView()
