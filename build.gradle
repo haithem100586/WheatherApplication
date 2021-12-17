@@ -3,7 +3,7 @@ buildscript {
     ext {
         toolsGradleVersion = "7.0.4"
         kotlinVersion = "1.5.20"
-        navigationKtxVersion = "2.3.5"
+        navigationKtxVersion = "2.4.0-alpha10"
 
         appCompactVersion = "1.4.0"
         coreKtxVersion = "1.7.0"
