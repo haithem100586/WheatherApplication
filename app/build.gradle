@@ -89,7 +89,7 @@ dependencies {
     api "com.squareup.moshi:moshi-kotlin:$moshiVersion"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
-    // Threetenabp
+    // ThreeTenAbp
     api "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
 
     // Retrofit
@@ -100,7 +100,7 @@ dependencies {
 
     // Unit test
     androidTestImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "android.arch.core:core-testing:$coretestingVersion"
+    testImplementation "androidx.arch.core:core-testing:$coretestingVersion"
     androidTestImplementation "org.koin:koin-test:$koinVersion"
     androidTestImplementation "io.mockk:mockk:$mockkVersion"
     androidTestImplementation "androidx.test:runner:$androidxTestRunnerVersion"
