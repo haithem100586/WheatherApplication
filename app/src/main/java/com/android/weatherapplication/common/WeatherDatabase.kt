@@ -13,6 +13,7 @@ import com.android.weatherapplication.data.Converters
 
 @Database(
     entities = [ForecastEntity::class, CurrentWeatherEntity::class, CitiesForSearchEntity::class],
+    exportSchema = false,
     version = 1
 )
 
