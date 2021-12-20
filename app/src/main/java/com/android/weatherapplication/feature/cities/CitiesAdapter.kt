@@ -1,5 +1,6 @@
 package com.android.weatherapplication.feature.cities
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ class CitiesAdapter(
 ) : RecyclerView.Adapter<CityViewHolder>() {
 
     var citiesList: MutableList<CitiesForSearchEntity> = mutableListOf()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()

@@ -32,10 +32,6 @@ abstract class ScreenFragment<B : ViewBinding> : BaseFragment<B>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onBackPressedCallback.isEnabled = true
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, onBackPressedCallback)
     }
 
@@ -48,11 +44,11 @@ abstract class ScreenFragment<B : ViewBinding> : BaseFragment<B>() {
     override fun initViews() {
         // Request activity orientation if needed
         screenOrientation
-                .takeIf { it != BEHIND }
-                .takeIf { it != activity?.requestedOrientation }
-                ?.let { requestedOrientation ->
-                    activity?.requestedOrientation = requestedOrientation
-                }
+            .takeIf { it != BEHIND }
+            .takeIf { it != activity?.requestedOrientation }
+            ?.let { requestedOrientation ->
+                activity?.requestedOrientation = requestedOrientation
+            }
     }
 
     /**

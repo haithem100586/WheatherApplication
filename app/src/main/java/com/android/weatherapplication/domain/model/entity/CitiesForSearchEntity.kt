@@ -1,14 +1,9 @@
 package com.android.weatherapplication.domain.model.entity
 
 import android.os.Parcelable
-import android.text.SpannableString
 import androidx.room.*
 import com.android.weatherapplication.domain.model.HitsItem
-import com.android.weatherapplication.utils.extensions.bold
-import com.android.weatherapplication.utils.extensions.italic
-import com.android.weatherapplication.utils.extensions.plus
-import com.android.weatherapplication.utils.extensions.spannable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "CitiesForSearch")
@@ -50,13 +45,4 @@ data class CitiesForSearchEntity(
         coord = null,
         county = null,
     )
-
-    fun getFullName(): SpannableString {
-        return spannable {
-            bold(name ?: "").plus(", ") +
-                    bold(county ?: "").plus(", ") +
-                    italic(administrative ?: "").plus(", ") +
-                    italic(country ?: "")
-        }
-    }
 }

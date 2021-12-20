@@ -1,17 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        kotlinVersion = "1.5.20"
-        junitVersion = "4.13.2"
-        extJunitVersion = "1.1.3"
-        espressoVersion = "3.4.0"
+        toolsGradleVersion = "7.0.4"
+        kotlinVersion = "1.6.10"
+        navigationKtxVersion = "2.4.0-rc01"
 
         appCompactVersion = "1.4.0"
         coreKtxVersion = "1.7.0"
         constraintlayoutVersion = "2.1.2"
         lifecycleExtensionsVersion = "2.2.0"
         lifecycleKtxVersion = "2.4.0"
-        navigationKtxVersion = "2.3.5"
 
         livedataSnakydesignVersion = "2.0.0"
 
@@ -23,25 +21,33 @@ buildscript {
 
         googlePlacesVersion = "2.5.0"
 
-        roomVersion = "2.3.0"
+        roomVersion = "2.4.0"
 
-        moshiVersion = "1.12.0"
+        moshiVersion = "1.13.0"
 
-        threetenabpVersion = "1.2.3"
+        threetenabpVersion = "1.3.1"
 
-        okhttpVersion = "4.9.2"
+        okhttpVersion = "5.0.0-alpha.3"
         retrofitVersion = "2.9.0"
+
+        junitVersion = "4.13.2"
+        coretestingVersion = "2.1.0"
+        mockkVersion = "1.12.1"
+        androidxTestRunnerVersion = "1.4.0"
+        androidxJunitVersion = "1.1.3"
+        espressoVersion = "3.4.0"
     }
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.3"
+        classpath "com.android.tools.build:gradle:$toolsGradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         // Add navigation safeargs
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationKtxVersion"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -51,7 +57,8 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        gradlePluginPortal()
     }
 }
 

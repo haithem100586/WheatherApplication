@@ -1,5 +1,6 @@
 package com.android.weatherapplication.feature.weather
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.android.weatherapplication.domain.model.ListItem
 class ForecastAdapter(private val context: Context) : RecyclerView.Adapter<ForecastViewHolder>() {
 
     var itemsList: MutableList<ListItem> = mutableListOf()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()

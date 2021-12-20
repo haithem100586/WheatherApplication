@@ -1,10 +1,10 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" formatted="false">WeatherApplication</string>
     <string name="action_settings">Settings</string>
 
     <!-- Cities-->
     <string name="cities_title" formatted="false">Cities</string>
-    <string name="api_key" formatted="false">AIzaSyD5q5UN4OGdXW2TUkCBYYiXArV1SmSSK9Y</string>
+    <string name="api_key" formatted="false" tools:ignore="Typos">AIzaSyD5q5UN4OGdXW2TUkCBYYiXArV1SmSSK9Y</string>
     <string name="delete_city_success" formatted="false">City deleted with success.</string>
 
     <!-- Add city-->

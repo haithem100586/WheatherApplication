@@ -1,9 +1,8 @@
 package com.android.weatherapplication.common
 
 import android.app.Application
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.android.weatherapplication.BaseProduct
 import org.koin.android.ext.android.getKoin
@@ -24,10 +23,10 @@ abstract class BaseApplication : Application() {
     /**
      * Product corresponding to this android application.
      */
-    val product by lazy {
+    private val product by lazy {
         Class.forName("$packageName.Product")
-                .kotlin
-                .objectInstance as BaseProduct
+            .kotlin
+            .objectInstance as BaseProduct
     }
 
     /**
@@ -91,27 +90,27 @@ abstract class BaseApplication : Application() {
      * Detects app foreground / background changes.
      */
     private fun initLifecycle() {
-        ProcessLifecycleOwner.get().lifecycle.addObserver(object : LifecycleObserver {
-            @OnLifecycleEvent(Lifecycle.Event.ON_START)
-            fun onStart() {
+        ProcessLifecycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onStart(owner: LifecycleOwner) {
+                super.onStart(owner)
                 onForeground()
             }
 
-            @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-            fun onStop() {
+            override fun onStop(owner: LifecycleOwner) {
+                super.onStop(owner)
                 onBackground()
             }
         })
 
         DestructionLifeCycleOwner.init(this)
-        DestructionLifeCycleOwner.get().lifecycle.addObserver(object : LifecycleObserver {
-            @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-            fun onCreate() {
+        DestructionLifeCycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onCreate(owner: LifecycleOwner) {
+                super.onCreate(owner)
                 onPreForeground()
             }
 
-            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-            fun onDestroy() {
+            override fun onDestroy(owner: LifecycleOwner) {
+                super.onDestroy(owner)
                 onPostBackground()
 
                 // renew scope for foreground-bound injections, so we get fresh instances
@@ -121,7 +120,8 @@ abstract class BaseApplication : Application() {
         })
     }
 
-    private fun createForegroundScope() = getKoin().createScope("foregroundSession", named(FOREGROUND_SCOPE_NAME))
+    private fun createForegroundScope() =
+        getKoin().createScope("foregroundSession", named(FOREGROUND_SCOPE_NAME))
 
     companion object {
         /**

@@ -3,12 +3,11 @@ package com.android.weatherapplication.domain.model
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Parcelable
-import com.android.weatherapp.domain.model.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.TextStyle
@@ -80,20 +79,6 @@ data class ListItem(
             DayOfWeek.FRIDAY -> Color.parseColor("#DC0000")
             DayOfWeek.SATURDAY -> Color.parseColor("#0051FF")
             DayOfWeek.SUNDAY -> Color.parseColor("#3D28E0")
-            else -> Color.parseColor("#28E0AE")
-        }
-    }
-
-    fun getHourColor(): Int {
-        return when (dtTxt?.substringAfter(" ")?.substringBeforeLast(":")) {
-            "00:00" -> Color.parseColor("#28E0AE")
-            "03:00" -> Color.parseColor("#FF0090")
-            "06:00" -> Color.parseColor("#FFAE00")
-            "09:00" -> Color.parseColor("#0090FF")
-            "12:00" -> Color.parseColor("#DC0000")
-            "15:00" -> Color.parseColor("#0051FF")
-            "18:00" -> Color.parseColor("#3D28E0")
-            "21:00" -> Color.parseColor("#50E3FE")
             else -> Color.parseColor("#28E0AE")
         }
     }

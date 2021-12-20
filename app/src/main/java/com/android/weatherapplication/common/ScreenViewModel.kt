@@ -5,7 +5,7 @@ package com.android.weatherapplication.common
  *
  * It extends [BaseStateViewModel] to add screen related state properties in [ScreenBaseState].
  *
- * @param initialState initial state of the viewmodel (mainly for testing purpose).
+ * @param initialState initial state of the viewModel (mainly for testing purpose).
  */
 abstract class ScreenViewModel<S : ScreenBaseState, E : BaseEvent>(
         initialState: S
