@@ -1,7 +1,6 @@
 package com.android.weatherapplication.feature.addcity
 
 import androidx.annotation.StringRes
-import com.android.weatherapplication.R
 import com.android.weatherapplication.common.BaseState
 import com.android.weatherapplication.domain.model.entity.CitiesForSearchEntity
 
@@ -24,6 +23,11 @@ interface AddCityContract {
          * Adds city in data base.
          */
         fun addCity()
+
+        /**
+         * Resets cityForSearchEntity.
+         */
+        fun resetCity()
     }
 
     /**
@@ -33,7 +37,7 @@ interface AddCityContract {
      */
     data class State(
         var cityForSearchEntity: CitiesForSearchEntity? = null,
-        @StringRes val messageResId: Int = R.string.add_city_success,
+        @StringRes val messageResId: Int? = null,
         val isCityAdded: Boolean = false
     ) : BaseState
 }

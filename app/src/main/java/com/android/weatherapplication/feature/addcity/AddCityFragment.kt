@@ -3,6 +3,8 @@ package com.android.weatherapplication.feature.addcity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
@@ -51,19 +53,24 @@ class AddCityFragment : ScreenStateFragment<FragmentAddCityBinding>() {
     override fun initEvents() {
         binding.apply {
             toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-            addCityButton.setOnClickListener { viewModel.addCity() }
+            addCityButton.setOnClickListener {
+                viewModel.addCity()
+            }
         }
     }
 
     override fun initObservations() {
         viewModel.state
-            .map { it.isCityAdded }
-            .filter { it == true }
-            .distinctUntilChanged()
-            .observe(viewLifecycleOwner) {
-                requireContext().displayToast(viewModel.currentState.messageResId)
-                findNavController().popBackStack()
-            }
+                .map { it.messageResId }
+                .distinctUntilChanged()
+                .observe(viewLifecycleOwner) {
+                    it?.let { it1 -> requireContext().displayToast(it1) }
+                }
+        viewModel.state
+                .map { it.isCityAdded }
+                .filter { it == true }
+                .distinctUntilChanged()
+                .observe(viewLifecycleOwner) { findNavController().popBackStack() }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -73,7 +80,7 @@ class AddCityFragment : ScreenStateFragment<FragmentAddCityBinding>() {
     private fun setupAutoCompletePlace() {
         // Initialize the AutocompleteSupportFragment.
         val autocompleteFragment =
-            childFragmentManager.findFragmentById(R.id.autocompleteFragment) as AutocompleteSupportFragment
+                childFragmentManager.findFragmentById(R.id.autocompleteFragment) as AutocompleteSupportFragment
 
         // Specify the types of place data to return.
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
@@ -83,11 +90,23 @@ class AddCityFragment : ScreenStateFragment<FragmentAddCityBinding>() {
             override fun onPlaceSelected(place: Place) {
                 Log.i("TAG", "Place: ${place.name}, ${place.id}")
                 place.id?.let { place.name?.let { it1 -> viewModel.setCity(it, it1) } }
+                clearText(autocompleteFragment)
             }
 
             override fun onError(status: Status) {
                 Log.i("TAG", "An error occurred: $status")
             }
         })
+    }
+
+    private fun clearText(autocompleteFragment: AutocompleteSupportFragment) {
+        val clearButton: ImageView? =
+                autocompleteFragment.view?.findViewById(R.id.places_autocomplete_clear_button)
+        clearButton?.setOnClickListener {
+            val placeEditText =
+                    autocompleteFragment.view?.findViewById(R.id.places_autocomplete_search_input) as EditText
+            placeEditText.setText("")
+            viewModel.resetCity()
+        }
     }
 }

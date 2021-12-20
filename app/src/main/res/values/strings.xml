@@ -10,6 +10,7 @@
     <!-- Add city-->
     <string name="add_city_title" formatted="false">Cities</string>
     <string name="add_city" formatted="false">Add City</string>
+    <string name="add_city_country_required" formatted="false">Search city is required.</string>
     <string name="add_city_success" formatted="false">City Added with success.</string>
 
     <!-- Weather -->
