@@ -20,6 +20,7 @@ import com.helloumi.weatherapplication.common.view.recyclerview.MarginItemDecora
 import com.helloumi.weatherapplication.databinding.FragmentCitiesBinding
 import com.helloumi.weatherapplication.domain.model.entity.CitiesForSearchEntity
 import com.helloumi.weatherapplication.utils.extensions.displayToast
+import com.snakydesign.livedataextensions.nonNull
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -68,6 +69,11 @@ class CitiesFragment : ScreenStateFragment<FragmentCitiesBinding>() {
             .map { it.citiesList }
             .distinctUntilChanged()
             .observe(viewLifecycleOwner, this::updateCitiesList)
+        viewModel.state
+            .map { it.positionOfItemToDelete }
+            .nonNull()
+            .distinctUntilChanged()
+            .observe(viewLifecycleOwner, this::deleteCity)
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -93,7 +99,7 @@ class CitiesFragment : ScreenStateFragment<FragmentCitiesBinding>() {
     private fun swipeToRecyclerView(recyclerView: RecyclerView) {
         val swipeController = SwipeController(requireContext(), object : SwipeControllerActions {
             override fun onRightClicked(position: Int) {
-                deleteCity(position)
+                viewModel.deleteCity(position, citiesAdapter.getItem(position))
             }
         }, ContextCompat.getDrawable(requireContext(), R.drawable.ic_trash))
 
@@ -113,9 +119,10 @@ class CitiesFragment : ScreenStateFragment<FragmentCitiesBinding>() {
         }
     }
 
-    private fun deleteCity(position: Int) {
-        viewModel.deleteCity(citiesAdapter.getItem(position))
-        citiesAdapter.removeAt(position)
-        requireContext().displayToast(viewModel.currentState.messageResId)
+    private fun deleteCity(position: Int?) {
+        if (position != null) {
+            citiesAdapter.removeAt(position)
+            requireContext().displayToast(viewModel.currentState.messageResId)
+        }
     }
 }

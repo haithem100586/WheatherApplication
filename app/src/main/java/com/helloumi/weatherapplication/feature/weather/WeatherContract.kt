@@ -37,8 +37,8 @@ interface WeatherContract {
      * @property errorText resource id for text error.
      */
     data class State(
-        val isWeatherTaken: Boolean = false,
-        val isForecastTaken: Boolean = false,
+        val isWeatherTaken: Boolean? = null,
+        val isForecastTaken: Boolean? = null,
         val currentWeatherResponse: CurrentWeatherResponse? = null,
         val forecastResponse: ForecastResponse? = null,
         @DrawableRes val weatherIconResId: Int? = null,
@@ -48,6 +48,6 @@ interface WeatherContract {
         /**
          * display loading progress bar.
          */
-        val isLoading: Boolean get() = isWeatherTaken && isForecastTaken
+        val isLoading: Boolean get() = isWeatherTaken == null && isForecastTaken == null
     }
 }

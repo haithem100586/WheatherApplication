@@ -11,6 +11,8 @@ class ListCitiesUseCase(private val citiesForSearchRepository: CitiesForSearchRe
 
     /**
      * Executes use case.
+     *
+     * @return list of CitiesForSearchEntity LiveData.
      */
     fun execute(): LiveData<List<CitiesForSearchEntity>> = citiesForSearchRepository.getAllCities()
 }

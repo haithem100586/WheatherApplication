@@ -14,16 +14,14 @@ import com.helloumi.weatherapplication.feature.main.NetworkAvailabilityMonitor
  * Cities ViewModel.
  */
 class CitiesViewModel(
-    listCitiesUseCase: ListCitiesUseCase,
+    private val listCitiesUseCase: ListCitiesUseCase,
     private val removeCityUseCase: RemoveCityUseCase,
     networkAvailabilityMonitor: NetworkAvailabilityMonitor,
     initialState: State = State()
 ) : BaseStateViewModel<State, BaseEvent>(initialState), ViewModel {
 
     init {
-        listCitiesUseCase.execute().observe(this) {
-            updateState { state -> state.copy(citiesList = it) }
-        }
+        getCities()
         networkAvailabilityMonitor.observe(this) { available ->
             updateState { state -> state.copy(isInternetAvailable = available) }
         }
@@ -33,6 +31,20 @@ class CitiesViewModel(
     // ViewModel contract implementation
     ///////////////////////////////////////////////////////////////////////////
 
-    override fun deleteCity(city: CitiesForSearchEntity) =
-        removeCityUseCase.execute(city).observeOnce(this)
+    override fun deleteCity(position: Int, city: CitiesForSearchEntity) =
+        removeCityUseCase.execute(city).observeOnce(this) { result ->
+            if (result == 1) {
+                updateState { state -> state.copy(positionOfItemToDelete = position) }
+            }
+        }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Internal
+    ///////////////////////////////////////////////////////////////////////////
+
+    fun getCities() {
+        listCitiesUseCase.execute().observe(this) {
+            updateState { state -> state.copy(citiesList = it) }
+        }
+    }
 }

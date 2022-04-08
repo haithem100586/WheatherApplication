@@ -2,7 +2,6 @@ package com.helloumi.weatherapplication.feature.weather
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import com.helloumi.weatherapplication.R
 import com.helloumi.weatherapplication.feature.weather.WeatherContract.State
 import com.helloumi.weatherapplication.feature.weather.WeatherContract.ViewModel
@@ -31,19 +30,15 @@ class WeatherViewModel(
     ///////////////////////////////////////////////////////////////////////////
 
     override fun getCurrentWeather(cityName: String) {
-        updateState { it.copy(isWeatherTaken = true) }
+        updateState { it.copy(isWeatherTaken = null) }
         getCurrentWeatherUseCase.execute(cityName).observeOnce(this) { result ->
-            Log.i("getCurrentWeather", "result : $result")
             when (result) {
                 is CurrentWeatherResult.Success -> {
                     updateState {
                         it.copy(
-                            isWeatherTaken = false,
+                            isWeatherTaken = true,
                             currentWeatherResponse = result.currentWeatherResponse,
-                            weatherIconResId = context.resIdByName(
-                                "icon_${result.currentWeatherResponse.weather?.get(0)?.icon}",
-                                "drawable"
-                            ),
+                            weatherIconResId = getWeatherIconResId(result),
                             errorText = null
                         )
                     }
@@ -64,14 +59,13 @@ class WeatherViewModel(
     }
 
     override fun getForecast(cityName: String) {
-        updateState { it.copy(isForecastTaken = true) }
+        updateState { it.copy(isForecastTaken = null) }
         getForecastUseCase.execute(cityName).observeOnce(this) { result ->
-            Log.i("getForecast", "result : $result")
             when (result) {
                 is ForecastResult.Success -> {
                     updateState {
                         it.copy(
-                            isForecastTaken = false,
+                            isForecastTaken = true,
                             forecastResponse = result.forecastResponse,
                             errorText = null
                         )
@@ -91,4 +85,14 @@ class WeatherViewModel(
             }
         }
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Internal
+    ///////////////////////////////////////////////////////////////////////////
+
+    private fun getWeatherIconResId(currentWeatherResult: CurrentWeatherResult.Success) =
+        context.resIdByName(
+            "icon_${currentWeatherResult.currentWeatherResponse.weather?.get(0)?.icon}",
+            "drawable"
+        )
 }

@@ -10,6 +10,8 @@ class RemoveCityUseCase(private val citiesForSearchRepository: CitiesForSearchRe
 
     /**
      * Executes use case.
+     *
+     * @return liveData of Int.
      */
     fun execute(city: CitiesForSearchEntity) = citiesForSearchRepository.delete(city)
 }
