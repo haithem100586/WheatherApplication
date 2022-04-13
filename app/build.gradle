@@ -12,7 +12,7 @@ android {
     buildToolsVersion "31.0.0"
 
     defaultConfig {
-        applicationId "com.android.weatherapplication"
+        applicationId "com.helloumi.weatherapplication"
         minSdkVersion 23
         targetSdkVersion 31
         versionCode 1
@@ -20,12 +20,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        // Added to ignore schema export directory warning
-        javaCompileOptions {
+        // Added to ignore schema export directory warning if (exportSchema = true)
+        /*javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
-        }
+        }*/
     }
 
     buildTypes {
@@ -99,10 +99,10 @@ dependencies {
     api "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
 
     // Unit test
-    androidTestImplementation "junit:junit:$junitVersion"
+    testImplementation "junit:junit:$junitVersion"
     testImplementation "androidx.arch.core:core-testing:$coretestingVersion"
-    androidTestImplementation "org.koin:koin-test:$koinVersion"
-    androidTestImplementation "io.mockk:mockk:$mockkVersion"
+    testImplementation "org.koin:koin-test:$koinVersion"
+    testImplementation "io.mockk:mockk:$mockkVersion"
     androidTestImplementation "androidx.test:runner:$androidxTestRunnerVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     // Espresso

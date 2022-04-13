@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/CitiesFragment"
-        android:name="com.android.weatherapplication.feature.cities.CitiesFragment"
+        android:name="com.helloumi.weatherapplication.feature.cities.CitiesFragment"
         tools:layout="@layout/fragment_cities">
         <action
             android:id="@+id/to_add_city"
@@ -19,12 +19,12 @@
 
     <fragment
         android:id="@+id/AddCityFragment"
-        android:name="com.android.weatherapplication.feature.addcity.AddCityFragment"
+        android:name="com.helloumi.weatherapplication.feature.addcity.AddCityFragment"
         tools:layout="@layout/fragment_add_city" />
 
     <fragment
         android:id="@+id/WeatherFragment"
-        android:name="com.android.weatherapplication.feature.weather.WeatherFragment"
+        android:name="com.helloumi.weatherapplication.feature.weather.WeatherFragment"
         tools:layout="@layout/fragment_weather" >
         <argument
             android:name="city"
