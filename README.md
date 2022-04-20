@@ -3,6 +3,7 @@
 This project was made with the objective of check weather forecast, using tools and components supported by Google and by most of the Android development community.
 
 
+
 ## Clean Architecture
 
 Clean architecture promotes separation of concerns, making the code loosely coupled. This results in a more testable and flexible code. This approach divides the project in 3 modules: presentation, data and domain.
