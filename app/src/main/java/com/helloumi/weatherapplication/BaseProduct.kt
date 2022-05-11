@@ -3,7 +3,7 @@ package com.helloumi.weatherapplication
 import org.koin.core.module.Module
 
 /**
- * OpenFlight-based product.
+ * WeatherApplication-based product.
  *
  * Used to declare all product-specific components.
  */
